@@ -12,6 +12,7 @@ class HttpHelper {
   final String urlKey = 'api_key=cd4201de3a48a9eadba7e82bd579036c'; //1
   final String urlBase = 'https://api.themoviedb.org/3/movie'; //
   final String urlUpcoming = '/upcoming?'; //3
+  final String urlTopRated = '/top_rated?';
 
   final String urlLanguage = '&language=en-US'; //4
 
@@ -36,6 +37,22 @@ class HttpHelper {
         Uri.parse(urlBase + urlUpcoming + urlKey + urlLanguage);
 
     http.Response result = await http.get(upcoming);
+    if (result.statusCode == HttpStatus.ok) {
+      final jsonResponseBody = json.decode(result.body);
+      final movieObjects = jsonResponseBody['results'];
+      List movies = movieObjects.map((json) => Movie.fromJson(json)).toList();
+      return movies;
+    } else {
+      return [];
+    }
+  }
+
+  Future<List> getTopRatedMovieAsList() async {
+    final Uri topRated = Uri.parse(
+      urlBase + urlTopRated + urlKey + urlLanguage,
+    );
+
+    http.Response result = await http.get(topRated);
     if (result.statusCode == HttpStatus.ok) {
       final jsonResponseBody = json.decode(result.body);
       final movieObjects = jsonResponseBody['results'];
