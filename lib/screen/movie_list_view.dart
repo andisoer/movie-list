@@ -3,7 +3,6 @@ import 'package:pertemuan11/component/http_helper.dart';
 import 'movie_detail.dart';
 
 class MovieListView extends StatefulWidget {
-  //2
   const MovieListView({Key? key}) : super(key: key);
   @override
   State<MovieListView> createState() => _MovieListViewState();
@@ -61,7 +60,6 @@ class _MovieListViewState extends State<MovieListView> {
   }
 
   Future defaultList() async {
-    //5
     moviesCount = 0;
     movies = [];
     helper = HttpHelper();
@@ -74,7 +72,6 @@ class _MovieListViewState extends State<MovieListView> {
   }
 
   Future topRatedList() async {
-    //5
     moviesCount = 0;
     movies = [];
     helper = HttpHelper();
@@ -88,7 +85,7 @@ class _MovieListViewState extends State<MovieListView> {
 
   @override
   Widget build(BuildContext context) {
-    NetworkImage image; //tambahan image
+    NetworkImage image;
     return Scaffold(
       drawer: Drawer(
         child: ListView(
@@ -107,12 +104,12 @@ class _MovieListViewState extends State<MovieListView> {
             ListTile(
               title: const Text('Upcoming'),
               onTap: () {
-                Navigator.pop(context); //untuk menutup drawer
+                Navigator.pop(context);
                 setState(() {
                   searchIcon = const Icon(Icons.search);
                   titleBar = const Text('Daftar Film');
                 });
-                defaultList(); //perintah getUpcoming()
+                defaultList();
               },
             ),
             ListTile(
@@ -152,27 +149,24 @@ class _MovieListViewState extends State<MovieListView> {
       body: ListView.builder(
         itemCount: moviesCount,
         itemBuilder: (context, position) {
-// tambahan kode untuk akses image pada url
           if (movies[position].posterPath != null) {
             image = NetworkImage(iconBase + movies[position].posterPath);
           } else {
             image = NetworkImage(defaultImage);
           }
-//=============================
+
           return Card(
             elevation: 2,
             child: ListTile(
               onTap: () {
-                //1
                 MaterialPageRoute route = MaterialPageRoute(
-                  //2
                   builder: (context) {
                     return MovieDetail(
                       selectedMovie: movies[position],
                     );
                   },
                 );
-                Navigator.push(context, route); //3
+                Navigator.push(context, route);
               },
               leading: CircleAvatar(
                 backgroundImage: image,

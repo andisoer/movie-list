@@ -5,22 +5,17 @@ import 'package:http/http.dart' as http;
 import 'package:pertemuan11/model/movie.dart';
 
 class HttpHelper {
-  /*
-  Kelas ini digunakan untuk mendapatkan data dari themoviedb
-  dengan metode Upcoming yang memberikan nilai return berupa teks
-  */
-  final String urlKey = 'api_key=cd4201de3a48a9eadba7e82bd579036c'; //1
-  final String urlBase = 'https://api.themoviedb.org/3/movie'; //
-  final String urlUpcoming = '/upcoming?'; //3
+  final String urlKey = 'api_key=cd4201de3a48a9eadba7e82bd579036c';
+  final String urlBase = 'https://api.themoviedb.org/3/movie';
+  final String urlUpcoming = '/upcoming?';
   final String urlTopRated = '/top_rated?';
 
-  final String urlLanguage = '&language=en-US'; //4
+  final String urlLanguage = '&language=en-US';
 
   final String urlSearchBase =
       'https://api.themoviedb.org/3/search/movie?api_key=cd4201de3a48a9eadba7e82bd579036c&query=';
 
   Future<String> getUpcoming() async {
-    //5
     final Uri upcoming =
         Uri.parse(urlBase + urlUpcoming + urlKey + urlLanguage);
     http.Response result = await http.get(upcoming);
