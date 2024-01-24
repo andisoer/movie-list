@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pertemuan11/component/http_helper.dart';
 import 'movie_detail.dart';
 
@@ -155,6 +156,11 @@ class _MovieListViewState extends State<MovieListView> {
             image = NetworkImage(defaultImage);
           }
 
+          var date = movies[position].releaseDate;
+          var formattedDate = DateTime.parse(date);
+
+          date = DateFormat("d MMM yyyy").format(formattedDate);
+
           return Card(
             elevation: 2,
             child: ListTile(
@@ -174,7 +180,7 @@ class _MovieListViewState extends State<MovieListView> {
               title: Text(movies[position].title),
               subtitle: Text(
                 'Released: ' +
-                    movies[position].releaseDate +
+                    date +
                     ' - Vote: ' +
                     movies[position].voteAverage.toString(),
               ),

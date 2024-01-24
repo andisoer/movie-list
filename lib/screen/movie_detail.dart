@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pertemuan11/model/movie.dart';
 
 class MovieDetail extends StatelessWidget {
@@ -16,6 +17,11 @@ class MovieDetail extends StatelessWidget {
       path =
           'https://image.freeimages.com/images/large-previews/5eb/movie-clapboard-11844399.jpg';
     }
+
+    var date = selectedMovie.releaseDate ?? "2001-01-01";
+    var formattedDate = DateTime.parse(date);
+
+    date = DateFormat("d MMM yyyy").format(formattedDate);
 
     return Scaffold(
       appBar: AppBar(
@@ -42,7 +48,7 @@ class MovieDetail extends StatelessWidget {
                   ),
                   const Expanded(child: SizedBox()),
                   Text(
-                    'Release Date: ${selectedMovie.releaseDate}',
+                    'Release Date: $date',
                   ),
                   const SizedBox(width: 16),
                 ],
