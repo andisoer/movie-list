@@ -73,6 +73,19 @@ class _MovieListViewState extends State<MovieListView> {
     });
   }
 
+  Future topRatedList() async {
+    //5
+    moviesCount = 0;
+    movies = [];
+    helper = HttpHelper();
+    List moviesFromAPI = [];
+    moviesFromAPI = await helper.getTopRatedMovieAsList();
+    setState(() {
+      movies = moviesFromAPI;
+      moviesCount = movies.length;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     NetworkImage image; //tambahan image
@@ -80,6 +93,17 @@ class _MovieListViewState extends State<MovieListView> {
       drawer: Drawer(
         child: ListView(
           children: [
+            ListTile(
+              title: const Text('Top Rated'),
+              onTap: () {
+                Navigator.pop(context);
+                setState(() {
+                  searchIcon = const Icon(Icons.search);
+                  titleBar = const Text('Film Rating Tertinggi');
+                });
+                topRatedList();
+              },
+            ),
             ListTile(
               title: const Text('Upcoming'),
               onTap: () {
