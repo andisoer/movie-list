@@ -30,7 +30,26 @@ class MovieDetail extends StatelessWidget {
                 height: screenHeight / 1.5,
                 child: Image.network(path),
               ),
-              Text('${selectedMovie.overview}'),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text('${selectedMovie.overview}'),
+              ),
+              Row(
+                children: [
+                  const SizedBox(width: 16),
+                  Text(
+                    'Rating : ${selectedMovie.voteAverage}',
+                  ),
+                  const Expanded(child: SizedBox()),
+                  Text(
+                    'Release Date: ${selectedMovie.releaseDate}',
+                  ),
+                  const SizedBox(width: 16),
+                ],
+              ),
+              const SizedBox(height: 16),
+              const Text('Created by Andi Surya, NIM : 21201194'),
+              const SizedBox(height: 48),
             ],
           ),
         ),
