@@ -99,7 +99,7 @@ class _MovieListViewState extends State<MovieListView> {
                 Navigator.pop(context);
                 setState(() {
                   searchIcon = const Icon(Icons.search);
-                  titleBar = const Text('Film Tinggi Rating');
+                  titleBar = const Text('Film Rating Tertinggi');
                 });
                 topRatedList();
               },
