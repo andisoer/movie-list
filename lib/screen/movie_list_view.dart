@@ -150,7 +150,8 @@ class _MovieListViewState extends State<MovieListView> {
       body: ListView.builder(
         itemCount: moviesCount,
         itemBuilder: (context, position) {
-          if (movies[position].posterPath != null) {
+          var selectedMovies = movies[position];
+          if (selectedMovies.posterPath != null) {
             image = NetworkImage(iconBase + movies[position].posterPath);
           } else {
             image = NetworkImage(defaultImage);
@@ -161,28 +162,79 @@ class _MovieListViewState extends State<MovieListView> {
 
           date = DateFormat("d MMM yyyy").format(formattedDate);
 
-          return Card(
-            elevation: 2,
-            child: ListTile(
-              onTap: () {
-                MaterialPageRoute route = MaterialPageRoute(
-                  builder: (context) {
-                    return MovieDetail(
-                      selectedMovie: movies[position],
-                    );
-                  },
-                );
-                Navigator.push(context, route);
-              },
-              leading: CircleAvatar(
-                backgroundImage: image,
+          return InkWell(
+            onTap: () {
+              MaterialPageRoute route = MaterialPageRoute(
+                builder: (context) {
+                  return MovieDetail(
+                    selectedMovie: movies[position],
+                  );
+                },
+              );
+              Navigator.push(context, route);
+            },
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+              height: 100,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    offset: const Offset(0, 4),
+                    blurRadius: 16,
+                  )
+                ],
               ),
-              title: Text(movies[position].title),
-              subtitle: Text(
-                'Released: ' +
-                    date +
-                    ' - Vote: ' +
-                    movies[position].voteAverage.toString(),
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(16),
+                      bottomLeft: Radius.circular(16),
+                    ),
+                    child: Image(
+                      image: image,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 4),
+                      Text(
+                        selectedMovies.title,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 18,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(date),
+                      const SizedBox(height: 4),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.star,
+                            color: Colors.orange,
+                            size: 16,
+                          ),
+                          const SizedBox(width: 2),
+                          Text(
+                            selectedMovies.voteAverage.toString(),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w300,
+                              fontSize: 12,
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 4),
+                    ],
+                  ),
+                ],
               ),
             ),
           );
