@@ -199,40 +199,44 @@ class _MovieListViewState extends State<MovieListView> {
                     ),
                   ),
                   const SizedBox(width: 12),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 4),
-                      Text(
-                        selectedMovies.title,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 18,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(date),
-                      const SizedBox(height: 4),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            Icons.star,
-                            color: Colors.orange,
-                            size: 16,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 4),
+                        Text(
+                          selectedMovies.title,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 18,
                           ),
-                          const SizedBox(width: 2),
-                          Text(
-                            selectedMovies.voteAverage.toString(),
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w300,
-                              fontSize: 12,
+                        ),
+                        const SizedBox(height: 4),
+                        Text(date),
+                        const SizedBox(height: 4),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.star,
+                              color: Colors.orange,
+                              size: 16,
                             ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 4),
-                    ],
+                            const SizedBox(width: 2),
+                            Text(
+                              selectedMovies.voteAverage.toString(),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w300,
+                                fontSize: 12,
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: 4),
+                      ],
+                    ),
                   ),
                 ],
               ),
