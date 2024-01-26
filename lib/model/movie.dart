@@ -14,6 +14,8 @@ class Movie {
   String? releaseDate; //untuk data "release_date" pada JSON
   String? overview; //untuk data "overview" pada JSON
   String? posterPath; //untuk data "poster_path" pada JSON
+  String? backdropPath; //untuk data "poster_path" pada JSON
+  int? voteCount;
 
   Movie.fromJson(Map<String, dynamic> json) {
     //1
@@ -23,5 +25,7 @@ class Movie {
     releaseDate = json["release_date"];
     overview = json["overview"];
     posterPath = json["poster_path"];
+    backdropPath = json["backdrop_path"];
+    voteCount = json["vote_count"];
   }
 }

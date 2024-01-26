@@ -35,6 +35,9 @@ class HttpHelper {
     if (result.statusCode == HttpStatus.ok) {
       final jsonResponseBody = json.decode(result.body);
       final movieObjects = jsonResponseBody['results'];
+
+      print(movieObjects);
+
       List movies = movieObjects.map((json) => Movie.fromJson(json)).toList();
       return movies;
     } else {
