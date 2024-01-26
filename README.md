@@ -1,6 +1,4 @@
 # Movie List App
-
-## Overview
 Penerapan consume API pada Flutter untuk pertemuan 11 dan UAS mata kuliah Mobile Programming
 
 Package yang digunakan:
